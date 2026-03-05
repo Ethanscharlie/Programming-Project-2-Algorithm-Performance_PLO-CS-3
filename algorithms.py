@@ -1,3 +1,10 @@
+"""
+Ethan J. Hadley, Chris Miller, Christopher Reynolds, and Theodore Tran
+CS 2430 Team 6
+Programming Project 2: Algorithm Performance_PLO-CS-3 Spring 2026
+Primary author: Ethan J. Hadley
+"""
+
 from dataclasses import dataclass
 
 
