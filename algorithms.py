@@ -11,6 +11,9 @@ def generateArrayOfAllPossiblePermutations(n: int) -> list[list[int]]:
     """
     Generates all possible permutations of integers from 0 to n-1.
 
+    For example, if n = 3, your generator must produce:
+    {0, 1, 2}, {0, 2, 1}, {1, 0, 2}, {1, 2, 0}, {2, 0, 1}, {2, 1, 0}
+
     Requirements:
         Count only element-to-element comparisons that determine ordering,
         (e.g., a[i] < a[j]). Do not count loop bounds checks or index comparisons.
