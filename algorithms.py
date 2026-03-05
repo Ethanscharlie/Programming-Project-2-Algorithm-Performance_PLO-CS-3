@@ -21,7 +21,8 @@ def generateArrayOfAllPossiblePermutations(n: int) -> list[list[int]]:
     Returns:
         list[list[int]]: A list containing all permutations
     """
-    pass
+
+    return [[0]]
 
 
 def mergesort(array: list[int]) -> AlgorithmReport:
@@ -38,7 +39,9 @@ def mergesort(array: list[int]) -> AlgorithmReport:
     Returns:
         AlgorithmReport: containing a sorted array and the number of comparisions used.
     """
-    pass
+
+    report = AlgorithmReport()
+    return report
 
 
 def quicksort(array: list[int]) -> AlgorithmReport:
@@ -55,7 +58,9 @@ def quicksort(array: list[int]) -> AlgorithmReport:
     Returns:
         AlgorithmReport: containing a sorted array and the number of comparisions used.
     """
-    pass
+
+    report = AlgorithmReport()
+    return report
 
 
 def shakerSort(array: list[int]) -> AlgorithmReport:
@@ -72,7 +77,9 @@ def shakerSort(array: list[int]) -> AlgorithmReport:
     Returns:
         AlgorithmReport: containing a sorted array and the number of comparisions used.
     """
-    pass
+
+    report = AlgorithmReport()
+    return report
 
 
 def heapsort(array: list[int]) -> AlgorithmReport:
@@ -89,4 +96,6 @@ def heapsort(array: list[int]) -> AlgorithmReport:
     Returns:
         AlgorithmReport: containing a sorted array and the number of comparisions used.
     """
-    pass
+
+    report = AlgorithmReport()
+    return report
