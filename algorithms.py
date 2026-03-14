@@ -56,11 +56,55 @@ def generateArrayOfAllPossiblePermutations(n: int) -> list[list[int]]:
         else:
             array[auxiliaryArray[i]], array[i] = array[i], array[auxiliaryArray[i]]
 
-        output.append(array)
+        output.append(array.copy())
         auxiliaryArray[i] += 1
         i = 1
 
     return output
+
+
+def __merge(report: AlgorithmReport, left: int, middle: int, right: int) -> None:
+    L = [0] * (middle - left + 1)
+    R = [0] * (right - middle)
+
+    for i in range(len(L)):
+        L[i] = report.sortedArray[left + i]
+
+    for i in range(len(R)):
+        R[i] = report.sortedArray[middle + 1 + i]
+
+    i = 0
+    j = 0
+    k = left
+    while i < len(L) and j < len(R):
+        if L[i] <= R[j]:
+            report.sortedArray[k] = L[i]
+            i += 1
+        else:
+            report.sortedArray[k] = R[j]
+            j += 1
+
+        k += 1
+
+    while i < len(L):
+        report.sortedArray[k] = L[i]
+        i += 1
+        k += 1
+
+    while j < len(R):
+        report.sortedArray[k] = R[j]
+        j += 1
+        k += 1
+
+
+def __mergesort(report: AlgorithmReport, left: int, right: int) -> None:
+    if left >= right:
+        return
+
+    middle = (left + right) // 2
+    __mergesort(report, left, middle)
+    __mergesort(report, middle + 1, right)
+    __merge(report, left, middle, right)
 
 
 def mergesort(array: list[int]) -> AlgorithmReport:
@@ -78,7 +122,10 @@ def mergesort(array: list[int]) -> AlgorithmReport:
         AlgorithmReport: containing a sorted array and the number of comparisions used.
     """
 
-    report = AlgorithmReport()
+    report = AlgorithmReport(array.copy(), 0)
+
+    __mergesort(report, 0, len(report.sortedArray) - 1)
+
     return report
 
 
