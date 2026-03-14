@@ -63,50 +63,6 @@ def generateArrayOfAllPossiblePermutations(n: int) -> list[list[int]]:
     return output
 
 
-def __merge(report: AlgorithmReport, left: int, middle: int, right: int) -> None:
-    L = [0] * (middle - left + 1)
-    R = [0] * (right - middle)
-
-    for i in range(len(L)):
-        L[i] = report.sortedArray[left + i]
-
-    for i in range(len(R)):
-        R[i] = report.sortedArray[middle + 1 + i]
-
-    i = 0
-    j = 0
-    k = left
-    while i < len(L) and j < len(R):
-        if L[i] <= R[j]:
-            report.sortedArray[k] = L[i]
-            i += 1
-        else:
-            report.sortedArray[k] = R[j]
-            j += 1
-
-        k += 1
-
-    while i < len(L):
-        report.sortedArray[k] = L[i]
-        i += 1
-        k += 1
-
-    while j < len(R):
-        report.sortedArray[k] = R[j]
-        j += 1
-        k += 1
-
-
-def __mergesort(report: AlgorithmReport, left: int, right: int) -> None:
-    if left >= right:
-        return
-
-    middle = (left + right) // 2
-    __mergesort(report, left, middle)
-    __mergesort(report, middle + 1, right)
-    __merge(report, left, middle, right)
-
-
 def mergesort(array: list[int]) -> AlgorithmReport:
     """
     Sorts an array of integers using the mergesort algorithm.
@@ -122,10 +78,51 @@ def mergesort(array: list[int]) -> AlgorithmReport:
         AlgorithmReport: containing a sorted array and the number of comparisions used.
     """
 
+    def merge(report: AlgorithmReport, left: int, middle: int, right: int) -> None:
+        leftAuxiliaryArray = [0] * (middle - left + 1)
+        rightAuxiliaryArray = [0] * (right - middle)
+
+        for i in range(len(leftAuxiliaryArray)):
+            leftAuxiliaryArray[i] = report.sortedArray[left + i]
+
+        for i in range(len(rightAuxiliaryArray)):
+            rightAuxiliaryArray[i] = report.sortedArray[middle + 1 + i]
+
+        leftIndex = 0
+        rightIndex = 0
+        k = left
+        while leftIndex < len(leftAuxiliaryArray) and rightIndex < len(rightAuxiliaryArray):
+            if leftAuxiliaryArray[leftIndex] <= rightAuxiliaryArray[rightIndex]:
+                report.sortedArray[k] = leftAuxiliaryArray[leftIndex]
+                leftIndex += 1
+            else:
+                report.sortedArray[k] = rightAuxiliaryArray[rightIndex]
+                rightIndex += 1
+
+            k += 1
+            report.numberOfComparisions += 1
+
+        while leftIndex < len(leftAuxiliaryArray):
+            report.sortedArray[k] = leftAuxiliaryArray[leftIndex]
+            leftIndex += 1
+            k += 1
+
+        while rightIndex < len(rightAuxiliaryArray):
+            report.sortedArray[k] = rightAuxiliaryArray[rightIndex]
+            rightIndex += 1
+            k += 1
+
+    def mergesort(report: AlgorithmReport, left: int, right: int) -> None:
+        if left >= right:
+            return
+
+        middle = (left + right) // 2
+        mergesort(report, left, middle)
+        mergesort(report, middle + 1, right)
+        merge(report, left, middle, right)
+
     report = AlgorithmReport(array.copy(), 0)
-
-    __mergesort(report, 0, len(report.sortedArray) - 1)
-
+    mergesort(report, 0, len(report.sortedArray) - 1)
     return report
 
 
