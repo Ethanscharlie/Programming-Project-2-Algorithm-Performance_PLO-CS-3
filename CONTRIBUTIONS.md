@@ -80,11 +80,11 @@
 
 **Completed work (what you actually delivered)**
 - Project Plan started
-  - Evidence: ...
+  - Evidence: [Project Plan Upload](https://github.com/Ethanscharlie/Programming-Project-2-Algorithm-Performance_PLO-CS-3/commit/42ac6a532d6a0c5e774183537e746e71f197cf9f)
 - Contributions
   - Evidence: [CONTRIBUTIONS.md (this file)](https://github.com/Ethanscharlie/Programming-Project-2-Algorithm-Performance_PLO-CS-3/blob/main/CONTRIBUTIONS.md)
 - Read Me
-  - Evidence: ...
+  - Evidence: [Readme update commit](https://github.com/Ethanscharlie/Programming-Project-2-Algorithm-Performance_PLO-CS-3/commit/d511c5059d3e2dc154b64ae07fc7792d561c3340)
 
 ---
 
