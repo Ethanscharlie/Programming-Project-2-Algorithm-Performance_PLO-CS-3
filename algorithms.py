@@ -147,7 +147,19 @@ def quicksort(array: list[int]) -> AlgorithmReport:
 
 def shakerSort(array: list[int]) -> AlgorithmReport:
     """
-    Sorts an array of integers using shaker sort (aka bidirectional bubble sort).
+    Sorts an array of integers using the Shaker Sort algorithm. 
+    Also known as Bidirectional Bubble Sort and Cocktail Sort.
+
+    Sources: 
+        https://www.geeksforgeeks.org/dsa/cocktail-sort/
+        https://en.wikipedia.org/wiki/Cocktail_shaker_sort
+
+    Expected results:
+        Best Case O(n)
+        Average Case O(n^2)
+        Worst Case O(n^2)
+        Space O(1) Auxiliary Space
+        Maximum Number of Comparisons O(n^2)
 
     Requirements:
         Count only element-to-element comparisons that determine ordering,
@@ -158,9 +170,60 @@ def shakerSort(array: list[int]) -> AlgorithmReport:
 
     Returns:
         AlgorithmReport: containing a sorted array and the number of comparisions used.
+    
+    Author: TheodoreT
     """
+    # Keeps track of any swaps that occur to know when to stop the while loop.
+    # True means at least one swap was performed, 
+    # False means no swaps were performed.
+    swapPerformed = True 
+    # Gets and stores the beginning and end indices of the array.
+    # These are used to know when to stop "going through the array".
+    arrayLength = len(array) # "array" is the name of the local variable.
+    startIndex = 0
+    endIndex = arrayLength - 1
 
-    report = AlgorithmReport()
+    # Loop Stages 1 & 2 until no swaps are performed in either Stage 1 or Stage 2.
+    while (swapPerformed == True):
+        # Resets swapPerformed to False in case it was True in a previous iteration.
+        swapPerformed = False
+
+        # <-- Stage 1: Loop through array from left to right. -->
+        for i in range(startIndex, endIndex):
+            # Checks if current element is bigger than next element.
+            if (array[i] > a[i + 1]):
+                # Swaps bigger current element with the smaller next element.
+                array[i], array[i + 1] = array[i + 1], array[i]
+                swapPerformed = True # Marks that a swap has been performed.
+            report.numberOfComparisons += 1 # Counts comparison.
+        # If a swap was not performed, that means array is sorted and while loop can end.
+        if (swapPerformed == False): break
+        # Largest number is now at the end of the array after loop, 
+        # so we no longer need to sort that element from now on.
+        endIndex = endIndex - 1
+
+        # Resets swapPerformed to False in case it was True in the previous stage.
+        swapPerformed = False
+
+        # <-- Stage 2: Loop through array backwards from right to left. -->
+        # Both startIndex and endIndex need to be subtracted by 1 so that 
+        # the pair of elements being compared can be i and i+1, 
+        # since i-1 at i=0 does not work (out of bounds).
+        for i in range(endIndex - 1, startIndex - 1, -1):
+            # Checks if current element is bigger than next element.
+            if (array[i] > a[i + 1]):
+                # Swaps bigger current element with the smaller next element.
+                array[i], array[i + 1] = array[i + 1], array[i]
+                swapPerformed = True # Marks that a swap has been performed.
+            report.numberOfComparisons += 1 # Counts comparison.
+        # If a swap was not performed, that means array is sorted and while loop can end.
+        if (swapPerformed == False): break
+        # Smallest number is now at the beginning of the array after loop, 
+        # so we no longer need to sort that element from now on.
+        startIndex = startIndex + 1
+
+    # Creates the report to be returned based on the sorted array.
+    report = AlgorithmReport(array.copy(), 0) # numberOfComparisons is already counted.
     return report
 
 
