@@ -12,7 +12,7 @@ from dataclasses import dataclass, field
 class AlgorithmReport:
     sortedArray : list[int]
     numberOfComparisions: int
-    unsortedArray : list[int] = field(default_factory=lambda: [])
+    unsortedArray : list[int] = None
 
 
 def generateArrayOfAllPossiblePermutations(n: int) -> list[list[int]]:
