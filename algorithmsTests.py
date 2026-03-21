@@ -31,7 +31,6 @@ def testDriver(n : int, algorithm : Callable) -> list[AlgorithmReport]:
     
     """
     #TODO UPDATE COMMENT (I can do this, don't do it for me)
-    #TODO IMPLEMENT
     
     lists = algorithms.generateArrayOfAllPossiblePermutations(n) #is there a better name for this?
 
@@ -63,6 +62,11 @@ def run(algorithm : Callable, name : str):
 
     #TODO Get Average
 
+    sum = 0
+    for i in range(len(runs)):
+        sum += runs[i].numberOfComparisions
+    averageRuns = sum/len(runs)
+
     print(name + " Results: ")
     print("")
     #best
@@ -73,6 +77,7 @@ def run(algorithm : Callable, name : str):
     print("10 worst results: ")
     print("")
     print10(worst)
+    print("Average Runs: " + str(averageRuns))
 
 
 def print10(listOfResults : list[AlgorithmReport]):
@@ -80,7 +85,7 @@ def print10(listOfResults : list[AlgorithmReport]):
         print(str(i+1) + ": ")
         print("array: " + str(listOfResults[i].unsortedArray))
         print("number of comparisons: " + str(listOfResults[i].numberOfComparisions))
-        print("")
+    print("")
 
 def experimentalRuns():
     """
@@ -101,7 +106,6 @@ def experimentalRuns():
     run(algorithms.heapsort, "Heap Sort")
         
 
-    pass
 
 if __name__=="__main__":
     experimentalRuns()
