@@ -176,16 +176,17 @@ def shakerSort(array: list[int]) -> AlgorithmReport:
     
     Author: TheodoreT
     """
+    arrayCopy = array.copy()
     swapPerformed = True 
-    arrayLength = len(array) 
+    arrayLength = len(arrayCopy) 
     startIndex = 0
     endIndex = arrayLength - 1
 
     while (swapPerformed == True):
         swapPerformed = False
         for i in range(startIndex, endIndex):
-            if (array[i] > a[i + 1]):
-                array[i], array[i + 1] = array[i + 1], array[i]
+            if (arrayCopy[i] > arrayCopy[i + 1]):
+                arrayCopy[i], arrayCopy[i + 1] = arrayCopy[i + 1], arrayCopy[i]
                 swapPerformed = True 
             report.numberOfComparisons += 1 
         if (swapPerformed == False): break
@@ -193,14 +194,14 @@ def shakerSort(array: list[int]) -> AlgorithmReport:
 
         swapPerformed = False
         for i in range(endIndex - 1, startIndex - 1, -1):
-            if (array[i] > a[i + 1]):
-                array[i], array[i + 1] = array[i + 1], array[i]
+            if (arrayCopy[i] > arrayCopy[i + 1]):
+                arrayCopy[i], arrayCopy[i + 1] = arrayCopy[i + 1], arrayCopy[i]
                 swapPerformed = True 
             report.numberOfComparisons += 1 
         if (swapPerformed == False): break
         startIndex = startIndex + 1
 
-    report = AlgorithmReport(array.copy(), 0) 
+    report = AlgorithmReport(arrayCopy, 0) 
     return report
 
 
