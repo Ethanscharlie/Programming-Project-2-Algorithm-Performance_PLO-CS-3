@@ -7,8 +7,17 @@ Primary author: Christian Miller
 
 import algorithms
 from algorithms import AlgorithmReport
+from collections.abc import Callable
 
-def testDriver(n : int) -> list[AlgorithmReport]:
+def alreadySortedList(n : int) -> list[int]:
+    output : list[int] = []
+    for i in range(n):
+        output.append(i)
+    return output
+
+
+
+def testDriver(n : int, algorithm : Callable) -> list[AlgorithmReport]:
     """
     driver program that calls your functions from Part 2 and the generator from Part 1. 
     Then runs all four algorithms on each permutation, and records:
@@ -23,11 +32,55 @@ def testDriver(n : int) -> list[AlgorithmReport]:
     """
     #TODO UPDATE COMMENT (I can do this, don't do it for me)
     #TODO IMPLEMENT
-    algorithms.generateArrayOfAllPossiblePermutations(n) #is there a better name for this?
+    
+    lists = algorithms.generateArrayOfAllPossiblePermutations(n) #is there a better name for this?
 
+    output : list[AlgorithmReport] = []
 
-    return None
+    for i in range(n):
+        currentList = lists[i]
+        permutation : AlgorithmReport = algorithm(currentList)
+
+        permutation.unsortedArray = currentList
+        assert permutation.sortedArray == alreadySortedList(n)
+
+        output.append(permutation)
+
+    return output
     pass
+
+def run(algorithm : Callable, name : str):
+
+    #MergeSort
+    runs = testDriver(4, algorithm)
+    runs += testDriver(6, algorithm)
+    runs += testDriver(8, algorithm)
+    
+    best = runs.copy()
+    worst = runs.copy()
+    best.sort(key=lambda x: x.numberOfComparisions, reverse=False)
+    worst.sort(key=lambda x: x.numberOfComparisions, reverse=True)
+
+    #TODO Get Average
+
+    print(name + " Results: ")
+    print("")
+    #best
+    print("10 best results: ")
+    print("")
+    print10(best)
+    #worst
+    print("10 worst results: ")
+    print("")
+    print10(worst)
+
+
+def print10(listOfResults : list[AlgorithmReport]):
+    for i in range(len(listOfResults[:10])):
+        print(str(i+1) + ": ")
+        print("array: " + str(listOfResults[i].unsortedArray))
+        print("number of comparisons: " + str(listOfResults[i].numberOfComparisions))
+        print("")
 
 def experimentalRuns():
     """
@@ -41,11 +94,12 @@ def experimentalRuns():
 
     """
     #TODO UPDATE COMMENT (I can do this, don't do it for me)
-    #TODO IMPLEMENT
 
-    testDriver(4)
-    testDriver(6)
-    testDriver(8)
+    run(algorithms.mergesort, "Merge Sort")
+    run(algorithms.quicksort, "Quick Sort")
+    run(algorithms.shakerSort, "Shaker Sort")
+    run(algorithms.heapsort, "Heap Sort")
+        
 
     pass
 

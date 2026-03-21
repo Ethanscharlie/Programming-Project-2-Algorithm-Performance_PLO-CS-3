@@ -5,13 +5,14 @@ Programming Project 2: Algorithm Performance_PLO-CS-3 Spring 2026
 Primary author: Ethan J. Hadley
 """
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 
 @dataclass
 class AlgorithmReport:
-    sortedArray: list[int]
+    sortedArray : list[int]
     numberOfComparisions: int
+    unsortedArray : list[int] = field(default_factory=lambda: [])
 
 
 def generateArrayOfAllPossiblePermutations(n: int) -> list[list[int]]:
@@ -184,7 +185,7 @@ def shakerSort(array: list[int]) -> AlgorithmReport:
     while (swapPerformed == True):
         swapPerformed = False
         for i in range(startIndex, endIndex):
-            if (array[i] > a[i + 1]):
+            if (array[i] > array[i + 1]):
                 array[i], array[i + 1] = array[i + 1], array[i]
                 swapPerformed = True 
             report.numberOfComparisons += 1 
