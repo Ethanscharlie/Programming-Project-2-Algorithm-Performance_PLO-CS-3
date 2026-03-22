@@ -22,13 +22,61 @@ def testDriver(n : int) -> list[AlgorithmReport]:
     
     """
     #TODO UPDATE COMMENT (I can do this, don't do it for me)
+<<<<<<< Updated upstream
     #TODO IMPLEMENT
     algorithms.generateArrayOfAllPossiblePermutations(n) #is there a better name for this?
+=======
+    
+    lists = permutations[n]
+>>>>>>> Stashed changes
 
 
     return None
     pass
 
+<<<<<<< Updated upstream
+=======
+def run(algorithm : Callable, name : str):
+
+    #MergeSort
+    runs = testDriver(4, algorithm)
+    runs += testDriver(6, algorithm)
+    runs += testDriver(8, algorithm)
+    
+    best = runs.copy()
+    worst = runs.copy()
+    best.sort(key=lambda x: x.numberOfComparisions, reverse=False)
+    worst.sort(key=lambda x: x.numberOfComparisions, reverse=True)
+
+    #Get Average
+    sum = 0
+    for i in range(len(runs)):
+        sum += runs[i].numberOfComparisions
+    averageRuns = sum/len(runs)
+
+    print("--------------------------------")
+    print(name + " Results: ")
+    print("")
+    #best
+    print("10 best results: ")
+    print("")
+    print10(best)
+    #worst
+    print("10 worst results: ")
+    print("")
+    print10(worst)
+    print("Average Runs: " + str(averageRuns))
+    print("--------------------------------")
+    print("")
+
+def print10(listOfResults : list[TestReport]):
+    for i in range(len(listOfResults[:10])):
+        print(str(i+1) + ": ")
+        print("array: " + str(listOfResults[i].unsortedArray))
+        print("number of comparisons: " + str(listOfResults[i].numberOfComparisions))
+    print("")
+
+>>>>>>> Stashed changes
 def experimentalRuns():
     """
     Run your system for n = 4, 6, 8 and record for each algorithm:
@@ -49,5 +97,13 @@ def experimentalRuns():
 
     pass
 
+<<<<<<< Updated upstream
+=======
+    run(algorithms.mergesort, "Merge Sort")
+    #run(algorithms.quicksort, "Quick Sort")
+    run(algorithms.shakerSort, "Shaker Sort")
+    run(algorithms.heapsort, "Heap Sort")
+        
+>>>>>>> Stashed changes
 if __name__=="__main__":
     experimentalRuns()
