@@ -2,7 +2,7 @@
 Ethan J. Hadley, Chris Miller, Christopher Reynolds, and Theodore Tran
 CS 2430 Team 6
 Programming Project 2: Algorithm Performance_PLO-CS-3 Spring 2026
-Primary author: Ethan J. Hadley
+Primary author: Ethan J. Hadley & Theodore T
 """
 
 from dataclasses import dataclass
@@ -32,6 +32,8 @@ def generateArrayOfAllPossiblePermutations(n: int) -> list[list[int]]:
 
     Returns:
         list[list[int]]: A list containing all permutations
+
+    Author: Ethan J. Hadley
     """
 
     output = []
@@ -76,6 +78,8 @@ def mergesort(array: list[int]) -> AlgorithmReport:
 
     Returns:
         AlgorithmReport: containing a sorted array and the number of comparisions used.
+
+    Author: Ethan J. Hadley
     """
 
     def merge(report: AlgorithmReport, left: int, middle: int, right: int) -> None:
@@ -139,6 +143,8 @@ def quicksort(array: list[int]) -> AlgorithmReport:
 
     Returns:
         AlgorithmReport: containing a sorted array and the number of comparisions used.
+
+    Author: Ethan J. Hadley
     """
 
     def quickSort(report: AlgorithmReport, low: int, high: int):
