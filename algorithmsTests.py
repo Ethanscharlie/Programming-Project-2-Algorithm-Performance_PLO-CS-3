@@ -8,6 +8,7 @@ Primary author: Christian Miller
 import algorithms
 from algorithms import AlgorithmReport
 from collections.abc import Callable
+from dataclasses import dataclass
 
 def alreadySortedList(n : int) -> list[int]:
     output : list[int] = []
