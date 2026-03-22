@@ -10,6 +10,12 @@ from algorithms import AlgorithmReport
 from collections.abc import Callable
 from dataclasses import dataclass
 
+permutations = {
+    4 : generateArrayOfAllPossiblePermutations(4),
+    6 : generateArrayOfAllPossiblePermutations(6),
+    8 : generateArrayOfAllPossiblePermutations(8)
+}
+
 def alreadySortedList(n : int) -> list[int]:
     output : list[int] = []
     for i in range(n):
@@ -37,6 +43,7 @@ def testDriver(n : int, algorithm : Callable) -> list[TestReport]:
     #TODO UPDATE COMMENT (I can do this, don't do it for me)
     
     #lists = algorithms.generateArrayOfAllPossiblePermutations(n) #is there a better name for this?
+    lists = permutations[n]
 
     output : list[TestReport] = []
 
@@ -82,7 +89,6 @@ def run(algorithm : Callable, name : str):
     print10(worst)
     print("Average Runs: " + str(averageRuns))
 
-
 def print10(listOfResults : list[TestReport]):
     for i in range(len(listOfResults[:10])):
         print(str(i+1) + ": ")
@@ -108,7 +114,5 @@ def experimentalRuns():
     run(algorithms.shakerSort, "Shaker Sort")
     run(algorithms.heapsort, "Heap Sort")
         
-
-
 if __name__=="__main__":
     experimentalRuns()
