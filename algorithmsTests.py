@@ -11,9 +11,9 @@ from collections.abc import Callable
 from dataclasses import dataclass
 
 permutations = {
-    4 : generateArrayOfAllPossiblePermutations(4),
-    6 : generateArrayOfAllPossiblePermutations(6),
-    8 : generateArrayOfAllPossiblePermutations(8)
+    4 : algorithms.generateArrayOfAllPossiblePermutations(4),
+    6 : algorithms.generateArrayOfAllPossiblePermutations(6),
+    8 : algorithms.generateArrayOfAllPossiblePermutations(8)
 }
 
 def alreadySortedList(n : int) -> list[int]:
