@@ -81,13 +81,170 @@ shakerSort(int array[])
 # during loop, two adjacent items are compared. If the value on the left is greater than the value on the right, then the values are swapped. Else, do nothing to that pair.
 # After the loop gets to the start of the array, smallest item will be at the beginning of the array.
 
+# "array" is the name of the local variable.
+    arrayCopy = array.copy() # Creates a copy of the array, which the copy will be sorted.
+    report = AlgorithmReport(arrayCopy, 0) # Creates the report to be returned.
+    # Keeps track of any swaps that occur to know when to stop the while loop.
+    # True means at least one swap was performed, 
+    # False means no swaps were performed.
+    swapPerformed = True 
+    # Gets and stores the beginning and end indices of the array.
+    # These are used to know when to stop "going through the array".
+    arrayLength = len(arrayCopy) 
+    startIndex = 0
+    endIndex = arrayLength - 1
+
+    # Loop Stages 1 & 2 until no swaps are performed in either Stage 1 or Stage 2.
+    while (swapPerformed == True):
+        # Resets swapPerformed to False in case it was True in a previous iteration.
+        swapPerformed = False
+
+        # <-- Stage 1: Loop through array from left to right. -->
+        for i in range(startIndex, endIndex):
+            # Checks if current element is bigger than next element.
+            if (arrayCopy[i] > arrayCopy[i + 1]):
+                # Swaps bigger current element with the smaller next element.
+                arrayCopy[i], arrayCopy[i + 1] = arrayCopy[i + 1], arrayCopy[i]
+                swapPerformed = True # Marks that a swap has been performed.
+            report.numberOfComparisons += 1 # Counts comparison.
+        # If a swap was not performed, that means array is sorted and while loop can end.
+        if (swapPerformed == False): break
+        # Largest number is now at the end of the array after loop, 
+        # so we no longer need to sort that element from now on.
+        endIndex = endIndex - 1
+
+        # Resets swapPerformed to False in case it was True in the previous stage.
+        swapPerformed = False
+
+        # <-- Stage 2: Loop through array backwards from right to left. -->
+        # Both startIndex and endIndex need to be subtracted by 1 so that 
+        # the pair of elements being compared can be i and i+1, 
+        # since i-1 at i=0 does not work (out of bounds).
+        for i in range(endIndex - 1, startIndex - 1, -1):
+            # Checks if current element is bigger than next element.
+            if (arrayCopy[i] > arrayCopy[i + 1]):
+                # Swaps bigger current element with the smaller next element.
+                arrayCopy[i], arrayCopy[i + 1] = arrayCopy[i + 1], arrayCopy[i]
+                swapPerformed = True # Marks that a swap has been performed.
+            report.numberOfComparisons += 1 # Counts comparison.
+        # If a swap was not performed, that means array is sorted and while loop can end.
+        if (swapPerformed == False): break
+        # Smallest number is now at the beginning of the array after loop, 
+        # so we no longer need to sort that element from now on.
+        startIndex = startIndex + 1
+    
+    return report
+
 }
 
 heapsort(int array[])
 {
+# Sources: 
+# https://www.geeksforgeeks.org/dsa/heap-sort/
+# https://algs4.cs.princeton.edu/24pq/
 
-# Heapify an array all at once (add the elements level-by-level)
-# Min Heap; all smaller elements swim up by swapping places
+# <-- Algs 4 Implementation --> 
+# // The only problem is that this implementation may not work with standard arrays and only works with priority queues. Not sure.
+# Store length of pq in n
+arrayLength = len(arrayCopy)
+
+# Phase 1: Heapify; Heap Construction
+# //root is at 0 in the heap
+# for (int k = n // 2 ; k >= 1; k--) // k starts in the middle of heap, k ends at index 1 (which is the index after the root)
+for parentIndex in range(arrayLength//2, 1, -1)
+	# sink(pq, k, n)
+	sink(arrayCopy, parentIndex, arrayLength)
+
+# Phase 2: Sortdown
+# int k = n
+k = arrayLength
+# while (k > 1)
+while (currentIndex > 1)
+	# swap element at index 1 with element at index k
+	arrayCopy[1], arrayCopy[k] = arrayCopy[k], arrayCopy[1]
+	# decrement k
+	k-=1
+	# sink (pq, 1, k)
+	sink(arrayCopy, 1, k)
+
+# Sink Function
+# void sink(pq, k, n) // k is the index of the parent
+def sink(array: int[], parentIndex: int, heapLength: int)
+	# // This loop looks for the largest element between k and these j's, and swaps until k is the largest element out of them all
+	# while (2 * k <= n) // n is length of entire array
+	while (2 * parentIndex <= heapLength)
+		# int j = 2 * k // j is the index of the left child, j+1 is right child
+		childIndex = 2 * parentIndex
+		# if (j < n && (/* j is less than j+1 */) ) # index j must be inside of the array
+		if (childIndex < heapLength && (childIndex < childIndex + 1)):
+			# increment j //increment is to compare j+1 and k, rather than comparing j and k
+			childIndex+=1
+		# if (/* k is NOT less than j */) break out of loop // this means k is the largest number between these elements
+		if (parentIndex >= childIndex): break
+		# // Otherwise, k is less than J, so J should be the parent and should be checked again.
+			# swap K and J
+		arrayCopy[parentIndex], arrayCopy[childIndex] = arrayCopy[childIndex], arrayCopy[parentIndex]
+
+# Code
+def sink(array: list[int], parentIndex: int, heapLength: int):
+        while (2 * parentIndex <= heapLength):
+            childIndex = 2 * parentIndex
+            if (childIndex < heapLength and (childIndex < childIndex + 1)): childIndex += 1
+            if (parentIndex >= childIndex): break
+            arrayCopy[parentIndex], arrayCopy[childIndex] = arrayCopy[childIndex], arrayCopy[parentIndex]
+
+arrayCopy = array.copy()
+report = AlgorithmReport(copyArray, 0)
+
+for parentIndex in range(arrayLength // 2, 1, -1): 
+    sink(arrayCopy, parentIndex, arrayLength)
+    
+currentIndex = arrayLength
+while (currentIndex > 1):
+    arrayCopy[1], arrayCopy[k] = arrayCopy[k], arrayCopy[1]
+    currentIndex -= 1
+    sink(arrayCoppy, 1, currentIndex)
+    
+return report
+		
+
+
+# <-- GeeksForGeeks Implementation -->
+# Heapify an array all at once
+def heapify(givenArray, numberOfElements, currentIndex): 
+	# largest number (current Index) is the root of the created heap
+	# left child; root's left branch's index 2i+1 (every element to the left is at an odd index)
+	# right child; root's right branch's index is 2i+2 (every element to the right is at an even index)
+	
+	# If left child is larger than the root, then switch the child and the root
+	# If right child is larger than the root, then switch the child and the root
+	# If largest is not the root, 
+
+# Max Heap; all smaller elements swim up by swapping places
+def heapsort(givenArray):
+	# get and store Number of Elements into n
+	# for each element before the middle of heap, heapify
+		# middle of heap: half of n and subtract by 1
+		# end at -1
+		# decrement
+	# for each element in the heap, (looping through from the second to last element to the first element)
+		# swap the current root of the heap (largest number) to the current index (the actual position)
+		# heapify again, but this time with the current largest number as the root
+
+
+# Other Notes
+
+# <-- Stage 1: Treat Array as a Complete Binary Tree -->
+	# array of size n
+	# root is at index 0
+	# every element to the left is at an odd index (2i + 1)
+	# every element to the right is at an even index (2i + 2)
+
+# <-- Stage 2: Build Max Heap -->
+# Parent nodes are larger than Child Nodes
+
+# <-- Stage 3: Sort Array -->
+# Sort the Array by placing Largest Element at the End of Unsorted Array.
 
 }
 ```
@@ -115,6 +272,7 @@ print("Heap Sort")
 heapsort(permutation)
 }
 }
+# Just brainstorming here, but maybe a solution could be to have the driver() function handle outputting the original list
 ```
 
 
