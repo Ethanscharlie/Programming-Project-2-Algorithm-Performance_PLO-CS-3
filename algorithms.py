@@ -5,14 +5,13 @@ Programming Project 2: Algorithm Performance_PLO-CS-3 Spring 2026
 Primary author: Ethan J. Hadley
 """
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 
 @dataclass
 class AlgorithmReport:
     sortedArray : list[int]
     numberOfComparisions: int
-    unsortedArray : list[int] = None
 
 
 def generateArrayOfAllPossiblePermutations(n: int) -> list[list[int]]:
