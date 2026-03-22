@@ -22,4 +22,4 @@ Primary author: Theodore Tran
 - Will the functions themselves keep track of how many comparisons it makes? Or is there some way for the “driver program” to obtain that data? 
   - The sorting functions themselves will keep track or “report” the number of comparisons. The variable ```AlgorithmReport``` will contain both the sorted array and the information.
 - Will the functions sort the given array directly or will they need to copy the array first and then sort the copy?
-  - In the current implementation, functions directly sort the given array, rather than copying the given array.
+  - The sorting functions copy the array first, then sort the copy.

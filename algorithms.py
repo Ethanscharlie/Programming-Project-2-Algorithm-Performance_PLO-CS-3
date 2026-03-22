@@ -10,7 +10,7 @@ from dataclasses import dataclass
 
 @dataclass
 class AlgorithmReport:
-    sortedArray : list[int]
+    sortedArray: list[int]
     numberOfComparisions: int
 
 
@@ -161,8 +161,6 @@ def shakerSort(array: list[int]) -> AlgorithmReport:
         Best Case O(n)
         Average Case O(n^2)
         Worst Case O(n^2)
-        Space O(1) Auxiliary Space
-        Maximum Number of Comparisons O(n^2)
 
     Requirements:
         Count only element-to-element comparisons that determine ordering,
@@ -176,16 +174,18 @@ def shakerSort(array: list[int]) -> AlgorithmReport:
     
     Author: TheodoreT
     """
+    arrayCopy = array.copy()
+    report = AlgorithmReport(arrayCopy, 0) 
     swapPerformed = True 
-    arrayLength = len(array) 
+    arrayLength = len(arrayCopy) 
     startIndex = 0
     endIndex = arrayLength - 1
 
     while (swapPerformed == True):
         swapPerformed = False
         for i in range(startIndex, endIndex):
-            if (array[i] > array[i + 1]):
-                array[i], array[i + 1] = array[i + 1], array[i]
+            if (arrayCopy[i] > arrayCopy[i + 1]):
+                arrayCopy[i], arrayCopy[i + 1] = arrayCopy[i + 1], arrayCopy[i]
                 swapPerformed = True 
             report.numberOfComparisons += 1 
         if (swapPerformed == False): break
@@ -193,20 +193,26 @@ def shakerSort(array: list[int]) -> AlgorithmReport:
 
         swapPerformed = False
         for i in range(endIndex - 1, startIndex - 1, -1):
-            if (array[i] > a[i + 1]):
-                array[i], array[i + 1] = array[i + 1], array[i]
+            if (arrayCopy[i] > arrayCopy[i + 1]):
+                arrayCopy[i], arrayCopy[i + 1] = arrayCopy[i + 1], arrayCopy[i]
                 swapPerformed = True 
             report.numberOfComparisons += 1 
         if (swapPerformed == False): break
         startIndex = startIndex + 1
-
-    report = AlgorithmReport(array.copy(), 0) 
+    
     return report
 
 
 def heapsort(array: list[int]) -> AlgorithmReport:
     """
     Sorts an array of integers using the heapsort algorithm.
+
+    Sources: 
+        https://www.geeksforgeeks.org/dsa/heap-sort/
+        https://algs4.cs.princeton.edu/24pq/
+    
+    Expected results:
+        All cases: O(n log n)
 
     Requirements:
         Count only element-to-element comparisons that determine ordering,
@@ -217,7 +223,37 @@ def heapsort(array: list[int]) -> AlgorithmReport:
 
     Returns:
         AlgorithmReport: containing a sorted array and the number of comparisions used.
+    
+    Author: TheodoreT
     """
+    def heapify(report: AlgorithmReport, array, n, i):
+        largest = i
+        leftChildIndex = 2 * i + 1
+        rightChildIndex = 2 * i + 2
 
-    report = AlgorithmReport()
+        if (leftChildIndex < n and array[leftChildIndex] > array[largest]):
+            largest = leftChildIndex
+        if (rightChildIndex < n and array[rightChildIndex] > array[largest]):
+            largest = rightChildIndex
+        report.numberOfComparisons += 2
+
+        if largest != i:
+            array[i], array[largest] = array[largest], array[i]
+        report.numberOfComparisons += 1
+
+        heapify(report, array, n, largest)
+
+    def sortDown(report: AlgorithmReport, array):
+        arrayLength = len(array)
+
+        for i in range(arrayLength // 2 - 1, -1, -1):
+            heapify(report, array, arrayLength, i)
+
+        for i in range(arrayLength - 1, 0, -1):
+            array[0], array[i] = array[i], array[0]
+            heapify(report, array, i, 0)
+    
+    arrayCopy = array.copy()
+    report = AlgorithmReport(arrayCopy, 0)
+    sortDown(report, arrayCopy)
     return report
