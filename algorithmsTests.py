@@ -15,7 +15,10 @@ def alreadySortedList(n : int) -> list[int]:
         output.append(i)
     return output
 
-
+@dataclass
+class TestReport:
+    unsortedArray : list[int]
+    numberOfComparisions : int
 
 def testDriver(n : int, algorithm : Callable) -> list[TestReport]:
     """
