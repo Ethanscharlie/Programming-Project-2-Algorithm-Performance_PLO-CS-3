@@ -3,6 +3,7 @@ Implement multiple sorting algorithms, generate input data systematically, and m
 
 To run:
 Download and extract the .zip file into a folder.
+
 Run algorithmsTests.py in the Command Prompt or Python Interpreter of choice
 
 # algorithms.py
