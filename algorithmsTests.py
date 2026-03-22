@@ -7,8 +7,27 @@ Primary author: Christian Miller
 
 import algorithms
 from algorithms import AlgorithmReport
+from collections.abc import Callable
+from dataclasses import dataclass
 
-def testDriver(n : int) -> list[AlgorithmReport]:
+permutations = {
+    4 : algorithms.generateArrayOfAllPossiblePermutations(4),
+    6 : algorithms.generateArrayOfAllPossiblePermutations(6),
+    8 : algorithms.generateArrayOfAllPossiblePermutations(8)
+}
+
+def alreadySortedList(n : int) -> list[int]:
+    output : list[int] = []
+    for i in range(n):
+        output.append(i)
+    return output
+
+@dataclass
+class TestReport:
+    unsortedArray : list[int]
+    numberOfComparisions : int
+
+def testDriver(n : int, algorithm : Callable) -> list[TestReport]:
     """
     driver program that calls your functions from Part 2 and the generator from Part 1. 
     Then runs all four algorithms on each permutation, and records:
@@ -22,20 +41,24 @@ def testDriver(n : int) -> list[AlgorithmReport]:
     
     """
     #TODO UPDATE COMMENT (I can do this, don't do it for me)
-<<<<<<< Updated upstream
-    #TODO IMPLEMENT
-    algorithms.generateArrayOfAllPossiblePermutations(n) #is there a better name for this?
-=======
     
+    #lists = algorithms.generateArrayOfAllPossiblePermutations(n) #is there a better name for this?
     lists = permutations[n]
->>>>>>> Stashed changes
 
+    output : list[TestReport] = []
 
-    return None
+    for i in range(n):
+
+        currentList = lists[i]
+        permutation : AlgorithmReport = algorithm(currentList)
+
+        assert permutation.sortedArray == alreadySortedList(n)
+
+        output.append(TestReport(currentList, permutation.numberOfComparisions))
+
+    return output
     pass
 
-<<<<<<< Updated upstream
-=======
 def run(algorithm : Callable, name : str):
 
     #MergeSort
@@ -54,7 +77,6 @@ def run(algorithm : Callable, name : str):
         sum += runs[i].numberOfComparisions
     averageRuns = sum/len(runs)
 
-    print("--------------------------------")
     print(name + " Results: ")
     print("")
     #best
@@ -66,8 +88,6 @@ def run(algorithm : Callable, name : str):
     print("")
     print10(worst)
     print("Average Runs: " + str(averageRuns))
-    print("--------------------------------")
-    print("")
 
 def print10(listOfResults : list[TestReport]):
     for i in range(len(listOfResults[:10])):
@@ -76,7 +96,6 @@ def print10(listOfResults : list[TestReport]):
         print("number of comparisons: " + str(listOfResults[i].numberOfComparisions))
     print("")
 
->>>>>>> Stashed changes
 def experimentalRuns():
     """
     Run your system for n = 4, 6, 8 and record for each algorithm:
@@ -89,21 +108,11 @@ def experimentalRuns():
 
     """
     #TODO UPDATE COMMENT (I can do this, don't do it for me)
-    #TODO IMPLEMENT
 
-    testDriver(4)
-    testDriver(6)
-    testDriver(8)
-
-    pass
-
-<<<<<<< Updated upstream
-=======
     run(algorithms.mergesort, "Merge Sort")
-    #run(algorithms.quicksort, "Quick Sort")
+    run(algorithms.quicksort, "Quick Sort")
     run(algorithms.shakerSort, "Shaker Sort")
     run(algorithms.heapsort, "Heap Sort")
         
->>>>>>> Stashed changes
 if __name__=="__main__":
     experimentalRuns()
