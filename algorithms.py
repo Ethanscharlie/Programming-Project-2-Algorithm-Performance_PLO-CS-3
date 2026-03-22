@@ -128,8 +128,6 @@ def mergesort(array: list[int]) -> AlgorithmReport:
 
 def quicksort(array: list[int]) -> AlgorithmReport:
     """
-    TODO: WARNING THIS FUNCTION IS MISSING COUNTING
-
     Sorts an array of integers using the quicksort algorithm.
 
     Requirements:
@@ -143,25 +141,33 @@ def quicksort(array: list[int]) -> AlgorithmReport:
         AlgorithmReport: containing a sorted array and the number of comparisions used.
     """
 
-    def quickSort(array, low, high):
+    def quickSort(report: AlgorithmReport, low: int, high: int):
         if low >= high:
             return
 
-        pivot = array[high]
+        pivot = report.sortedArray[high]
         paritionIndex = low - 1
 
         for i in range(low, high):
-            if array[i] < pivot:
+            report.numberOfComparisions += 1
+
+            if report.sortedArray[i] < pivot:
                 paritionIndex += 1
-                array[paritionIndex], array[i] = array[i], array[paritionIndex]
+                report.sortedArray[paritionIndex], report.sortedArray[i] = (
+                    report.sortedArray[i],
+                    report.sortedArray[paritionIndex],
+                )
 
-        array[paritionIndex + 1], array[high] = array[high], array[paritionIndex + 1]
+        report.sortedArray[paritionIndex + 1], report.sortedArray[high] = (
+            report.sortedArray[high],
+            report.sortedArray[paritionIndex + 1],
+        )
 
-        quickSort(array, low, paritionIndex)
-        quickSort(array, paritionIndex + 2, high)
+        quickSort(report, low, paritionIndex)
+        quickSort(report, paritionIndex + 2, high)
 
     report = AlgorithmReport(array.copy(), 0)
-    quickSort(report.sortedArray, 0, len(array) - 1)
+    quickSort(report, 0, len(array) - 1)
     return report
 
 
