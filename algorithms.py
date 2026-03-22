@@ -128,6 +128,8 @@ def mergesort(array: list[int]) -> AlgorithmReport:
 
 def quicksort(array: list[int]) -> AlgorithmReport:
     """
+    TODO: WARNING THIS FUNCTION IS MISSING COUNTING
+
     Sorts an array of integers using the quicksort algorithm.
 
     Requirements:
@@ -225,6 +227,8 @@ def shakerSort(array: list[int]) -> AlgorithmReport:
 
 def heapsort(array: list[int]) -> AlgorithmReport:
     """
+    TODO MAKE SURE COUNTING IS CORRECT
+
     Sorts an array of integers using the heapsort algorithm.
 
     Sources:
@@ -247,34 +251,33 @@ def heapsort(array: list[int]) -> AlgorithmReport:
     Author: TheodoreT
     """
 
-    def heapify(report: AlgorithmReport, array, n, i):
+    def heapify(report: AlgorithmReport, n, i):
         largest = i
         leftChildIndex = 2 * i + 1
         rightChildIndex = 2 * i + 2
 
-        if leftChildIndex < n and array[leftChildIndex] > array[largest]:
+        if leftChildIndex < n and report.sortedArray[leftChildIndex] > report.sortedArray[largest]:
             largest = leftChildIndex
-        if rightChildIndex < n and array[rightChildIndex] > array[largest]:
+        if rightChildIndex < n and report.sortedArray[rightChildIndex] > report.sortedArray[largest]:
             largest = rightChildIndex
         report.numberOfComparisions += 2
 
         if largest != i:
-            array[i], array[largest] = array[largest], array[i]
+            report.sortedArray[i], report.sortedArray[largest] = report.sortedArray[largest], report.sortedArray[i]
+            heapify(report, n, largest)
+
         report.numberOfComparisions += 1
 
-        heapify(report, array, n, largest)
-
-    def sortDown(report: AlgorithmReport, array):
-        arrayLength = len(array)
+    def sortDown(report: AlgorithmReport):
+        arrayLength = len(report.sortedArray)
 
         for i in range(arrayLength // 2 - 1, -1, -1):
-            heapify(report, array, arrayLength, i)
+            heapify(report, arrayLength, i)
 
         for i in range(arrayLength - 1, 0, -1):
-            array[0], array[i] = array[i], array[0]
-            heapify(report, array, i, 0)
+            report.sortedArray[0], report.sortedArray[i] = report.sortedArray[i], report.sortedArray[0]
+            heapify(report, i, 0)
 
-    arrayCopy = array.copy()
-    report = AlgorithmReport(arrayCopy, 0)
-    sortDown(report, arrayCopy)
+    report = AlgorithmReport(array.copy(), 0)
+    sortDown(report)
     return report
