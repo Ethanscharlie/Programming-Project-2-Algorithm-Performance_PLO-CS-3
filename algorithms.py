@@ -268,17 +268,20 @@ def heapsort(array: list[int]) -> AlgorithmReport:
         leftChildIndex = 2 * i + 1
         rightChildIndex = 2 * i + 2
 
-        if leftChildIndex < n and report.sortedArray[leftChildIndex] > report.sortedArray[largest]:
-            largest = leftChildIndex
-        if rightChildIndex < n and report.sortedArray[rightChildIndex] > report.sortedArray[largest]:
-            largest = rightChildIndex
-        report.numberOfComparisions += 2
+        if leftChildIndex < n:
+            report.numberOfComparisions += 1
+            if report.sortedArray[leftChildIndex] > report.sortedArray[largest]:
+                largest = leftChildIndex
 
+        if rightChildIndex < n:
+            report.numberOfComparisions += 1
+            if report.sortedArray[rightChildIndex] > report.sortedArray[largest]:
+                largest = rightChildIndex
+
+        report.numberOfComparisions += 1
         if largest != i:
             report.sortedArray[i], report.sortedArray[largest] = report.sortedArray[largest], report.sortedArray[i]
             heapify(report, n, largest)
-
-        report.numberOfComparisions += 1
 
     def sortDown(report: AlgorithmReport):
         arrayLength = len(report.sortedArray)
