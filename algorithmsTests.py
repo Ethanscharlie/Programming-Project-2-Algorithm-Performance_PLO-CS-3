@@ -10,6 +10,11 @@ from algorithms import AlgorithmReport
 from collections.abc import Callable
 from dataclasses import dataclass
 
+@dataclass
+class TestReport:
+    unsortedArray : list[int]
+    numberOfComparisions : int
+
 permutations = {
     4 : algorithms.generateArrayOfAllPossiblePermutations(4),
     6 : algorithms.generateArrayOfAllPossiblePermutations(6),
@@ -17,32 +22,40 @@ permutations = {
 }
 
 def alreadySortedList(n : int) -> list[int]:
+    """
+    Creates a list of length n which is the same as a sorted list from algorithms.py.
+
+    For Example, if n = 3, this function returns {0, 1, 2}
+
+    Returns:
+        list[int]: A list containing all integers from 0 to n
+    
+    Author: Christian Miller
+    """
+    assert n > 0
+
     output : list[int] = []
     for i in range(n):
         output.append(i)
     return output
 
-@dataclass
-class TestReport:
-    unsortedArray : list[int]
-    numberOfComparisions : int
-
 def testDriver(n : int, algorithm : Callable) -> list[TestReport]:
     """
-    driver program that calls your functions from Part 2 and the generator from Part 1. 
-    Then runs all four algorithms on each permutation, and records:
+    A program which retrieves the permutations generated from 
+    algorithms.generateArrayOfAllPossiblePermutations
+    Then performs a sorting algorithm on each.
+
+    Args:
+        n (int): The size of the permutation arrays
+        algorithm (Callable): The sorting algorithm to perform on each permutation.
 
     Returns:
-        Algorithm name
-
-        The unsorted array used
-
-        Number of comparisons
+        list[TestReport]: A list containing, for each permutation,
+        the number of comparisons and unsorted array given as input.
     
+    Author: Christian Miller
     """
-    #TODO UPDATE COMMENT (I can do this, don't do it for me)
     
-    #lists = algorithms.generateArrayOfAllPossiblePermutations(n) #is there a better name for this?
     lists = permutations[n]
 
     output : list[TestReport] = []
@@ -60,8 +73,18 @@ def testDriver(n : int, algorithm : Callable) -> list[TestReport]:
     pass
 
 def run(algorithm : Callable, name : str):
+    """
+    calls TestDriver for n = 4, 6, 8 for each algorithm. Records
+    the 10 cases with the fewest comparisons, the 10 cases with the most comparisons,
+    and the average comparisons across all permutations, printing each to console.
 
-    #MergeSort
+    Args:
+        algorithm (Callable): The sorting algorithm to use for each case.
+        name (str): The name of the sorting algorithm to be printed to console.
+
+    Author: Christian Miller
+    """
+
     runs = testDriver(4, algorithm)
     runs += testDriver(6, algorithm)
     runs += testDriver(8, algorithm)
@@ -85,34 +108,37 @@ def run(algorithm : Callable, name : str):
     print10(best)
     #worst
     print("10 worst results: ")
-    print("")
     print10(worst)
     print("Average Runs: " + str(averageRuns))
+    print("")
+
+def experimentalRuns():
+    """
+    Runs tests for four sorting algorithms: 
+    mergesort, quicksort, shakersort, and heapsort.
+
+    Author: Christian Miller
+    """
+
+    run(algorithms.mergesort, "Merge Sort")
+    run(algorithms.quicksort, "Quick Sort")
+    run(algorithms.shakerSort, "Shaker Sort")
+    run(algorithms.heapsort, "Heap Sort")
 
 def print10(listOfResults : list[TestReport]):
+    """
+    Takes the first ten entries in a list[TestReport], printing
+    the unsorted array used and the number of comparisons in it.
+
+    Args:
+        listOfResults (list[TestReport]): A list of test results to print to the console,
+        containing an unsorted array and the number of comparisons used in the sorting algorithm. 
+    """
     for i in range(len(listOfResults[:10])):
         print(str(i+1) + ": ")
         print("array: " + str(listOfResults[i].unsortedArray))
         print("number of comparisons: " + str(listOfResults[i].numberOfComparisions))
     print("")
 
-def experimentalRuns():
-    """
-    Run your system for n = 4, 6, 8 and record for each algorithm:
-
-    Best 10 cases (fewest comparisons) and the input arrays that produced them
-
-    Worst 10 cases (most comparisons) and the input arrays that produced them
-        
-    Average comparisons across all permutations
-
-    """
-    #TODO UPDATE COMMENT (I can do this, don't do it for me)
-
-    run(algorithms.mergesort, "Merge Sort")
-    run(algorithms.quicksort, "Quick Sort")
-    run(algorithms.shakerSort, "Shaker Sort")
-    run(algorithms.heapsort, "Heap Sort")
-        
 if __name__=="__main__":
     experimentalRuns()

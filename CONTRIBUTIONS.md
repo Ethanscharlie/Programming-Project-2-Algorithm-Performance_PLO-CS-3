@@ -52,6 +52,8 @@
 **Completed work (what you actually delivered)**
 - Started Verifications (Part 3 & 4)
   - Evidence: [algorithmsTests.py](https://github.com/Ethanscharlie/Programming-Project-2-Algorithm-Performance_PLO-CS-3/blob/main/algorithmsTests.py)
+- Finished Verifications
+  - Evidence: [algorithmsTests.py](https://github.com/Ethanscharlie/Programming-Project-2-Algorithm-Performance_PLO-CS-3/blob/main/algorithmsTests.py), [Last Commit](https://github.com/Ethanscharlie/Programming-Project-2-Algorithm-Performance_PLO-CS-3/commit/663e5df73ec1441dbae83baf9b207b983479cc53)
 
 ---
 
