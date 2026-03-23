@@ -37,6 +37,12 @@
   - Evidence: [algorithms.py](https://github.com/Ethanscharlie/Programming-Project-2-Algorithm-Performance_PLO-CS-3/blob/main/algorithms.py)
 - Merge Sort complete
   - Evidence: [Commit](https://github.com/Ethanscharlie/Programming-Project-2-Algorithm-Performance_PLO-CS-3/commit/4ad0ab333a8798f552022185248021ec453565a4)
+- Quick Sort Implementation
+  - Evidence: [commit](https://github.com/Ethanscharlie/Programming-Project-2-Algorithm-Performance_PLO-CS-3/commit/72393741b9c9328bf28cdaae3d8e4f6a1bbcc757)
+- Code cleanup
+  - Evidence: [commit](https://github.com/Ethanscharlie/Programming-Project-2-Algorithm-Performance_PLO-CS-3/commit/eee3190e893b919b14ea5e134d5b277dbd376f24)
+  - Evidence: [commit](https://github.com/Ethanscharlie/Programming-Project-2-Algorithm-Performance_PLO-CS-3/commit/771c6c2e808982da99e45ab408d5e2aae30a2dba)
+  - Evidence: [commit](https://github.com/Ethanscharlie/Programming-Project-2-Algorithm-Performance_PLO-CS-3/commit/cc12be0d19711130d806426925f659e1c6b42d39)
 
 **Collaboration / support**
 - Paired on Implementation with Theodore Tran
@@ -54,6 +60,8 @@
   - Evidence: [algorithmsTests.py](https://github.com/Ethanscharlie/Programming-Project-2-Algorithm-Performance_PLO-CS-3/blob/main/algorithmsTests.py)
 - Finished Verifications
   - Evidence: [algorithmsTests.py](https://github.com/Ethanscharlie/Programming-Project-2-Algorithm-Performance_PLO-CS-3/blob/main/algorithmsTests.py), [Last Commit](https://github.com/Ethanscharlie/Programming-Project-2-Algorithm-Performance_PLO-CS-3/commit/663e5df73ec1441dbae83baf9b207b983479cc53)
+- Run Instructions in Readme
+  - Evidence: [commit](https://github.com/Ethanscharlie/Programming-Project-2-Algorithm-Performance_PLO-CS-3/commit/8ed9f7184358bb1973a91966c64af6dcb6243ad0)
 
 ---
 
@@ -68,6 +76,10 @@
   - Evidence: [docs/proj_2_pseudocode.md](https://github.com/Ethanscharlie/Programming-Project-2-Algorithm-Performance_PLO-CS-3/blob/main/docs/proj_2_pseudocode.md)
 - Design Notes
   - Evidence: [docs/proj_2_design-notes.md](https://github.com/Ethanscharlie/Programming-Project-2-Algorithm-Performance_PLO-CS-3/blob/main/docs/proj_2_design-notes.md)
+- Shaker Sort Implementation
+  - Evidence: [commit](https://github.com/Ethanscharlie/Programming-Project-2-Algorithm-Performance_PLO-CS-3/commit/75c9c240f371806504cbfb8249dcb8609bd03cf7)
+- Heap Sort Implementation
+  - Evidence: [commit](https://github.com/Ethanscharlie/Programming-Project-2-Algorithm-Performance_PLO-CS-3/commit/c95d504f9817eae63b9d264272e49e6ddaf35ea5)
 
 
 **Collaboration / support**
