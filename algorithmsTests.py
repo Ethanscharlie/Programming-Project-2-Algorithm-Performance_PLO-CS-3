@@ -136,7 +136,7 @@ def print10(listOfResults : list[TestReport]):
     """
     for i in range(len(listOfResults[:10])):
         print(str(i+1) + ": ")
-        print("array: " + str(listOfResults[i].unsortedArray))
+        print("n = " + str(len(listOfResults[i].unsortedArray)) + ", unsorted array: " + str(listOfResults[i].unsortedArray))
         print("number of comparisons: " + str(listOfResults[i].numberOfComparisions))
     print("")
 
