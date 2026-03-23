@@ -102,5 +102,5 @@ Each team member should add initials next to their name once reviewed.
 
 - Ethan J. Hadley:      EH    Date: Mar 22
 - Christian Miller:     ____  Date: ____
-- Theodore Tran:        ____  Date: ____
+- Theodore Tran:        TT  Date: Mar 22
 - Christopher Reynolds: ____  Date: ____
